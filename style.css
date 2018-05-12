@@ -5,5 +5,5 @@ svg {
 
   .tick{
       stroke: #ccc;
-      stroke-dasharray: 10, 5; //length of dash and distance between dashes
+      stroke-dasharray: 5, 10; //length of dash and distance between dashes
   }

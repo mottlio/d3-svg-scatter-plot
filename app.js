@@ -54,8 +54,15 @@ d3.select("svg")
     .attr("r", d => radiusScale(d.births));
 
 
-// adding x and y LABELS
+// adding title, x and y LABELS
 
+d3.select("svg")
+  .append("text")
+    .attr("x", width/2)
+    .attr("y", padding)
+    .style("text-anchor", "middle")
+    .style("font-size", "1.5em")
+    .text("Data on Births by Country in 2011")
 
 d3.select("svg")
   .append("text")
@@ -64,3 +71,14 @@ d3.select("svg")
     .attr("dy", "1.5em") //push text down relative to the x axis
     .style("text-anchor", "middle")
     .text("Births per Capita")
+
+//y-axis
+
+d3.select("svg")
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height/2)
+      .attr("y", padding)
+      .attr("dy", "-1.1em")
+      .style("text-anchor", "middle")
+      .text("Life Expectancy");
