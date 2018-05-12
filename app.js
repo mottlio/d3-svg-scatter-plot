@@ -19,7 +19,9 @@ var colorScale = d3.scaleLinear()
                 .domain(d3.extent(birthData2011, d => d.population/d.area))
                 .range(["lightgreen", "black"]);
 
-var 
+var radiusScale = d3.scaleLinear()
+                    .domain(d3.extent(birthData2011, d => d.births))
+                    .range([2, 40]);
 
 d3.select("svg")
     .attr("width", width)
@@ -31,4 +33,4 @@ d3.select("svg")
     .attr("cx", d => xScale(d.births / d.population))
     .attr("cy", d => yScale(d.lifeExpectancy))
     .attr("fill", d => colorScale(d.population/d.area))
-    .attr("r", 5);
+    .attr("r", d => radiusScale(d.births));
