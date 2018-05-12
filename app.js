@@ -14,6 +14,12 @@ var xScale = d3.scaleLinear()
                 .range([padding, width - padding]);
 
 
+var xAxis = d3.axisBottom(xScale)
+                .tickSize(-height + 2*padding)
+                .tickSizeOuter(0);
+var yAxis = d3.axisLeft(yScale)
+                .tickSize(-width + 2*padding)
+                .tickSizeOuter(0);
 
 var colorScale = d3.scaleLinear()
                 .domain(d3.extent(birthData2011, d => d.population/d.area))
@@ -22,6 +28,18 @@ var colorScale = d3.scaleLinear()
 var radiusScale = d3.scaleLinear()
                     .domain(d3.extent(birthData2011, d => d.births))
                     .range([2, 40]);
+
+
+d3.select("svg")
+    .append("g")
+      .attr("transform", "translate(0," + (height-padding) + ")")
+      .call(xAxis);
+
+d3.select("svg")
+    .append("g")
+    .attr("transform", "translate(" + padding +", 0)")
+    .call(yAxis);
+
 
 d3.select("svg")
     .attr("width", width)
