@@ -1,6 +1,6 @@
 var width = 500;
 var height = 500;
-var padding = 20; //to avoid circles overflowing and being cut by the shape of the SVG
+var padding = 30; //to avoid circles overflowing and being cut by the shape of the SVG
 
 var yMax = d3.max(birthData2011, d => d.lifeExpectancy);
 var yMin = d3.min(birthData2011, d => d.lifeExpectancy);
@@ -52,3 +52,15 @@ d3.select("svg")
     .attr("cy", d => yScale(d.lifeExpectancy))
     .attr("fill", d => colorScale(d.population/d.area))
     .attr("r", d => radiusScale(d.births));
+
+
+// adding x and y LABELS
+
+
+d3.select("svg")
+  .append("text")
+    .attr("x", width/2)
+    .attr("y", height - padding)
+    .attr("dy", "1.5em") //push text down relative to the x axis
+    .style("text-anchor", "middle")
+    .text("Births per Capita")
