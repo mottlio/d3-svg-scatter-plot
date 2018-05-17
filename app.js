@@ -56,12 +56,18 @@ d3.select("svg")
     .attr("cy", d => yScale(d.lifeExpectancy))
     .attr("fill", d => colorScale(d.population/d.area))
     .attr("r", d => radiusScale(d.births))
-    .on("mousemove", function(){
+    .on("mousemove", function(d){
       tooltip 
         .style("opacity", 1)
-        .style("left", d3.event.x + "px")
-        .style("top", d3.event.y + "px")
-        .text("HERE IS A TOOLTIP");
+        .style("left", d3.event.x - (tooltip.node().offsetWidth / 2) + "px")
+        .style("top", d3.event.y + 25 + "px")
+        .html(`
+        <p>Region: ${d.region}</p>
+        <p>Births: ${d.births.toLocaleString()}</p>
+        <p>Population: ${d.population.toLocaleString()}</p>
+        <p>Area: ${d.area.toLocaleString()}</p>
+        <p>Life Expectancy: ${d.lifeExpectancy}</p>
+        `);
     })
     .on("mouseout", function(){
       tooltip

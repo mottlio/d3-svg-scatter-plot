@@ -11,4 +11,12 @@ svg {
   .tooltip{
       opacity: 0;
       position: absolute;
-  }
+      pointer-events: none; /* this prevents the motion of the tooltip to fire a mouseout event on the circle */
+      background-color: lightblue;
+      border: 8px solid blue;
+      padding: 15px;
+    }
+
+.tooltip p {
+    margin: 0;
+}
