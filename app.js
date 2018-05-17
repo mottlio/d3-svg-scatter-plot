@@ -56,23 +56,10 @@ d3.select("svg")
     .attr("cy", d => yScale(d.lifeExpectancy))
     .attr("fill", d => colorScale(d.population/d.area))
     .attr("r", d => radiusScale(d.births))
-    .on("mousemove", function(d){
-      tooltip 
-        .style("opacity", 1)
-        .style("left", d3.event.x - (tooltip.node().offsetWidth / 2) + "px")
-        .style("top", d3.event.y + 25 + "px")
-        .html(`
-        <p>Region: ${d.region}</p>
-        <p>Births: ${d.births.toLocaleString()}</p>
-        <p>Population: ${d.population.toLocaleString()}</p>
-        <p>Area: ${d.area.toLocaleString()}</p>
-        <p>Life Expectancy: ${d.lifeExpectancy}</p>
-        `);
-    })
-    .on("mouseout", function(){
-      tooltip
-        .style("opacity", 0);
-    })
+    .on("mousemove", showTooltip)
+    .on("mouseout", hideTooltip)
+    .on("touchstart", showTooltip)
+    .on("touchend", hideTooltip)
 
 
 // adding title, x and y LABELS
@@ -103,3 +90,23 @@ d3.select("svg")
       .attr("dy", "-1.1em")
       .style("text-anchor", "middle")
       .text("Life Expectancy");
+
+
+function showTooltip(d){
+  tooltip 
+    .style("opacity", 1)
+    .style("left", d3.event.x - (tooltip.node().offsetWidth / 2) + "px")
+    .style("top", d3.event.y + 25 + "px")
+    .html(`
+    <p>Region: ${d.region}</p>
+    <p>Births: ${d.births.toLocaleString()}</p>
+    <p>Population: ${d.population.toLocaleString()}</p>
+    <p>Area: ${d.area.toLocaleString()}</p>
+    <p>Life Expectancy: ${d.lifeExpectancy}</p>
+    `);
+}
+
+function hideTooltip(){
+  tooltip
+    .style("opacity", 0);
+}
