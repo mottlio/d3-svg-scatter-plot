@@ -7,3 +7,8 @@ svg {
       stroke: #ccc;
       stroke-dasharray: 5, 10; 
   }
+
+  .tooltip{
+      opacity: 0;
+      position: absolute;
+  }

@@ -30,6 +30,10 @@ var radiusScale = d3.scaleLinear()
                     .range([2, 40]);
 
 
+var tooltip = d3.select("body")
+              .append("div")
+                .classed("tooltip", true)
+
 d3.select("svg")
     .append("g")
       .attr("transform", "translate(0," + (height-padding) + ")")
@@ -51,7 +55,18 @@ d3.select("svg")
     .attr("cx", d => xScale(d.births / d.population))
     .attr("cy", d => yScale(d.lifeExpectancy))
     .attr("fill", d => colorScale(d.population/d.area))
-    .attr("r", d => radiusScale(d.births));
+    .attr("r", d => radiusScale(d.births))
+    .on("mousemove", function(){
+      tooltip 
+        .style("opacity", 1)
+        .style("left", d3.event.x + "px")
+        .style("top", d3.event.y + "px")
+        .text("HERE IS A TOOLTIP");
+    })
+    .on("mouseout", function(){
+      tooltip
+        .style("opacity", 0);
+    })
 
 
 // adding title, x and y LABELS
